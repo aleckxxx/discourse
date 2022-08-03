@@ -51,8 +51,11 @@ gem 'jwt'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'omniauth'
 
+gem 'omniauth-google-oauth2'
 
+gem 'rack-cors'
 # Use Sass to process CSS
 # gem "sassc-rails"
 
