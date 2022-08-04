@@ -1,14 +1,44 @@
 class Api::V1::PostController < Api::V1::ApplicationController
     before_action :authorize_request, except: [:index,:show]
+     
     #GET /api/v1/posts
     def index
-     @posts = Post.order('created_at desc')
+
+     @posts = Post.where(published: true)
+                  .left_outer_joins(:replies)
+                  .select('posts.id,posts.title, posts.published_at, count(replies.id) as count')
+                  .group('posts.id,posts.title, posts.published_at')
+                  .order('posts.published_at desc').map do |p|
+                  {
+                    id: p.id,
+                    title: p.title,
+                    count: p.count,
+                    published_at: p.published_at
+                  }
+                end
      render json: @posts, status: :ok
     end
+    
+    #GET /api/v1/post_drafts
+    def drafts
+      @posts = Post.where(published: false,creator_id: @current_user.id).select('id,title,created_at').order('created_at')
+      render json: @posts, status: :ok
+    end
+
     #GET /api/v1/posts/1
     def show
-      @post = Post.find(params[:id])
-      render json: @post.to_json(include: {creator:{:except => :password_digest},replies: {include:{creator: {:except => :password_digest}}}}), status: :ok
+      begin 
+        @post = Post.find(params[:id])
+        if @post.published 
+          render json: @post.to_json(include: {creator:{:except => :password_digest},replies: {include:{creator: {:except => :password_digest}}}}), status: :ok
+        elsif has_access(@post.creator_id)
+          render json: @post.to_json(include: {creator:{:except => :password_digest},replies: {include:{creator: {:except => :password_digest}}}}), status: :ok
+        else
+          render json: {message: "This post does not exist or you don't have access."}, status: :bad_request
+        end
+      rescue  ActiveRecord::RecordNotFound => e
+        render json: {message: "This post does not exist or you don't have access."}, status: :bad_request 
+      end
     end
     
     #POST /api/v1/posts
@@ -46,6 +76,6 @@ class Api::V1::PostController < Api::V1::ApplicationController
 
     private 
     def post_params
-        params.permit(:title, :body)
+        params.permit(:title, :body,:published)
     end
 end

@@ -25,7 +25,7 @@ function login(email, password) {
     };
 
     return fetch(`/api/v1/auth/login`, requestOptions)
-        .then(handleResponse)
+        .then((resp)=>handleResponse(resp,false))
         .then(user => {
             return createSession(user);
         })

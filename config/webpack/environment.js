@@ -1,10 +1,13 @@
 const { environment } = require('@rails/webpacker')
-environment.loaders.append('babel', {
-    test: /\.jsx?$/,
-    loader: 'babel-loader',
-    exclude: /node_modules/,
-    query: {
-        presets: ['es2015']
-    }
-})
+const webpack = require("webpack")
+
+environment.plugins.append("Provide", new webpack.ProvidePlugin({
+
+$: 'jquery',
+
+jQuery: 'jquery',
+
+Popper: ['popper.js', 'default']
+
+}))
 module.exports = environment

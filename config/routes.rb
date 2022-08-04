@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       put '/posts/:id', to: 'post#update'
       post '/posts', to: 'post#create'
       delete '/posts/:id', to: 'post#delete'
+      get '/post_drafts', to: 'post#drafts'
+      post '/replies', to: 'reply#create'
     end
   end
   root 'homepage#index'

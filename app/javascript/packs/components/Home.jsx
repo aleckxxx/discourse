@@ -1,6 +1,7 @@
 import React from "react";
 import { authenticationService } from "../services/authentication.service";
-import { postservice } from "../services/post.service";
+import { postService } from "../services/post.service";
+import NewPost from "./newPost";
 import PostItem from "./PostItem";
 export default class Home extends React.Component{
     constructor(props){
@@ -10,32 +11,32 @@ export default class Home extends React.Component{
         }
     }
     componentDidMount(){
-        postservice.getPosts().then((posts)=>{
+        postService.getPosts().then((posts)=>{
             this.setState({
                 posts: posts
             })
         })
     }
+
     render(){
         return (
-        <div class="container">
-            <div class="btn-group mt-5" role="group" aria-label="Basic outlined example">
-                <button type="button" class="btn btn-outline-primary active">Latest</button>
+        <div className="container">
+            <div className="btn-group mt-5" role="group" aria-label="Basic outlined example">
+                <button type="button" className="btn btn-outline-primary active">Latest</button>
             </div>
             {authenticationService.currentUserValue && (
-                <div class="d-flex mt-3 justify-content-end">
-                    <Link class="btn btn-secondary">new post</Link>
-                </div>
+                <NewPost />
             )}
-            <table class="table mt-5">
+            <table className="table mt-5">
                 <thead>
                     <tr>
                         <th>Topics</th>
-                        <th>Activity</th>
+                        <th>Replies</th>
+                        <th>Published</th>
                     </tr>
                 </thead>
-                <tbody class="text-secondary">
-                    {this.state.posts.map((val)=> <PostItem post={val} />)}             
+                <tbody className="text-secondary">
+                    {this.state.posts.map((val)=> <PostItem key={val.id} post={val} />)}             
                 </tbody>
             </table>
         </div>

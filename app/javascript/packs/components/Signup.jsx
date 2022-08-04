@@ -4,20 +4,19 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import {Link} from 'react-router-dom';
 import * as Yup from 'yup';
 import React from "react";
-
+import history from "../helpers/history";
 
 export default class Signup extends React.Component{
     constructor(props){
         super(props);
         if(authenticationService.currentUserValue){
-            this.props.history.push("/");
+            history.push("/");
         }
     }
     render(){
-        const history = this.props.history;
         return (
             <div className="form-auth align-self-center shadow rounded">
-                <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+                <h1 className="h3 mb-3 fw-normal">Register yourself</h1>
                 <Formik
                        initialValues={{
                            email: '',
@@ -41,7 +40,7 @@ export default class Signup extends React.Component{
                                    },
                                    error =>{
                                     setStatus(error.message);
-                                    setErrors(error);
+                                    setErrors(error.errors);
                                     setSubmitting(false);
                                    }
                                )
