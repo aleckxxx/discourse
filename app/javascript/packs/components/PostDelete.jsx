@@ -33,7 +33,7 @@ class PostDelete extends React.Component{
     render(){
         return (
             <span className="mr-2">
-              <div className="h5 text-danger" onClick={this.handleOpen.bind(this)}><i class="fa fa-trash"></i></div>
+              <div className="h5 text-danger" onClick={this.handleOpen.bind(this)}><i className="fa fa-trash"></i></div>
               <Modal isOpen={this.state.show}
                 ariaHideApp={false}
                 className="modal-dialog modal-dialog-centered"

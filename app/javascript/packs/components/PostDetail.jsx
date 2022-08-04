@@ -18,7 +18,7 @@ class PostDetail extends React.Component{
             date: null
         };
         this.add = this.add.bind(this);
-        this.isOwner = this.add.bind(this);
+        this.isOwner = this.isOwner.bind(this);
     }
     componentDidMount(){
         postService.findById(this.props.params.id).then((data)=>{
@@ -31,14 +31,16 @@ class PostDetail extends React.Component{
         this.setState({...this.state,replies: replies});
     }
     isOwner(){
-        return (authenticationService.currentUserValue && (authenticationService.currentUserValue.id == this.state.post.creator_id))
+        if(authenticationService.currentUserValue && (authenticationService.currentUserValue.id == this.state.post.creator_id))
+            return true
+        return false
     }
     render(){
         return  (
             <div className="container">
                 {this.state.post && (
                 <div>
-                    {this.isOwner && (
+                    {this.isOwner? "": (
                         <div className="d-flex flex-row-reverse mt-3">
                             <PostDelete post={this.state.post} />
                             <UpdatePost post={this.state.post} />
@@ -64,7 +66,8 @@ class PostDetail extends React.Component{
                         </div>
                     </div>
                     {this.state.post.replies.map((reply)=> <ReplyItem reply={reply} />)}
-                    <ReplyForm handleClick={this.add} id={this.state.post.id} />
+
+                    {authenticationService.currentUserValue ? <ReplyForm handleClick={this.add} id={this.state.post.id} />:<h5 className="text-center mt-5">Please log in if you want to comment</h5>}
                 </div>
                 )}
                 

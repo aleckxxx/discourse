@@ -24,7 +24,7 @@ export default class DraftItem extends React.Component{
             <div className="d-flex justify-content-between border-bottom bt-4">
                 <h5 className="p-3">{post.title}</h5>
                 <div className="p-3 d-flex">
-                    <p title="publish" className="text-primary mr-2 h5" onClick={this.publish}><i class="fa fa-share"></i></p>
+                    <p title="publish" className="text-primary mr-2 h5" onClick={this.publish}><i className="fa fa-share"></i></p>
                     <UpdatePost reload={true} post={post}/>
                     <PostDelete post={post} />
                 </div>
