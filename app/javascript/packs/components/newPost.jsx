@@ -76,7 +76,7 @@ class NewPost extends React.Component{
                                                 <ErrorMessage name="body" component="div" className="invalid-feedback" />
                                             </div>
                                             <div className="d-flex w-100 flex-row-reverse form-group mt-2 mb-2">
-                                                <button type="submit" className="btn btn-primary " disabled={isSubmitting}>{isSubmitting? <div className="spinner-border text-light"></div>:"Publish"}</button>
+                                                <button type="submit" className="btn btn-primary " disabled={isSubmitting}>{isSubmitting? <div className="spinner-border text-light"></div>:"Create"}</button>
                                             </div>
                                             
                                         </Form>
