@@ -2,6 +2,15 @@
 $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 @import "~@fortawesome/fontawesome-free/scss/solid";
+.rdw-editor-toolbar{
+    margin-bottom: 0!important;
+}
+.rdw-editor-main{
+    border-radius: 0 0 5px 5px!important;
+    border: 1px solid #dee2e6!important;
+    height: 200px!important;
+    overflow-y: auto!important;
+}
 .modal-post{
     margin-top: 100px;
     

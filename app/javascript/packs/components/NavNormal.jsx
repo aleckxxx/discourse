@@ -14,7 +14,7 @@ export default class NavNormal extends React.Component{
     render(){
         return (
             <nav className="nav">
-                <p className="mr-3">Hello {authenticationService.currentUserValue.username}!</p>
+                <p className="mr-3 font-weight-bold">Hello {authenticationService.currentUserValue.username}!</p>
                 <Link to="/profile" className="mr-3 text-decoration-none text-dark">Profile</Link>
                 <p className="mr-3" onClick={this.logOut}>Log out</p>
             </nav>

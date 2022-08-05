@@ -4,14 +4,16 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import  {postService} from '../services/post.service';
 import history from '../helpers/history';
-
+import EditorContainer from './EditorContainer';
 class NewPost extends React.Component{
 
     constructor(props){
         super(props);
         this.state ={
-            show: this.props.show
+            show: this.props.show,
+            body: ''
         }
+        this.changePostBody = this.changePostBody.bind(this);
     }
     handleClose(e) {
         this.setState({show: false});
@@ -19,6 +21,13 @@ class NewPost extends React.Component{
     handleOpen(e){
         e.preventDefault();
         this.setState({show: true});
+    }
+    changePostBody(data){
+        console.log(data);
+        this.setState({
+            ...this.state,
+            body: data
+        })
     }
     render(){
         return (
@@ -42,16 +51,14 @@ class NewPost extends React.Component{
                                 <p className="mb-3">You can express herself today. Ask a question.</p>
                                 <Formik
                                     initialValues={{
-                                        title: '',
-                                        body: ''
+                                        title: ''
                                     }}
                                     validationSchema={Yup.object().shape({
-                                        title: Yup.string().required('Title is required'),
-                                        body: Yup.string().required('Body is required')
+                                        title: Yup.string().required('Title is required')
                                     })}
-                                    onSubmit={(body, { setStatus, setSubmitting }) => {
+                                    onSubmit={(body, { setErrors,setStatus, setSubmitting }) => {
                                         setStatus();
-                                        postService.createPost(body).then(data=>{
+                                        postService.createPost({...body,body: this.state.body}).then(data=>{
                                             history.push("/profile");
                                         },
                                         error=>{
@@ -72,8 +79,7 @@ class NewPost extends React.Component{
                                             </div>
                                             <div className="form-group">
                                                 <label htmlFor="body" className="mt-1 mb-2">Body :</label>
-                                                <Field name="body" as="textarea"  className={'form-post-body form-control' + (errors.body && touched.body ? ' is-invalid' : '')} />
-                                                <ErrorMessage name="body" component="div" className="invalid-feedback" />
+                                                <EditorContainer stateSaver={this.changePostBody} />
                                             </div>
                                             <div className="d-flex w-100 flex-row-reverse form-group mt-2 mb-2">
                                                 <button type="submit" className="btn btn-primary " disabled={isSubmitting}>{isSubmitting? <div className="spinner-border text-light"></div>:"Create"}</button>

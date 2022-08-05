@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-
+import EditorContainer from './EditorContainer';
 export class PostForm extends React.Component{
 
     constructor(props){
@@ -13,22 +13,26 @@ export class PostForm extends React.Component{
             action: this.props.action,
             actionName: this.props.actionName
         }
+        this.changePostBody = this.changePostBody.bind(this);
     }
-
+    changePostBody(data){
+        this.setState({
+            ...this.state,
+            content: data
+        })
+    }
     render(){
         return (
             <Formik
                 initialValues={{
                     title: this.state.title || "",
-                    body: this.state.content || ""
                 }}
                 validationSchema={Yup.object().shape({
-                    title: Yup.string().required('Title is required'),
-                    body: Yup.string().required('Body is required')
+                    title: Yup.string().required('Title is required')
                 })}
                 onSubmit={(body, { setStatus,setErrors, setSubmitting }) => {
                     setStatus();
-                    this.state.action(body,{setStatus,setErrors,setSubmitting});
+                    this.state.action({...body, body: this.state.content},{setStatus,setErrors,setSubmitting});
                 }}
                 render={({ errors, status, touched, isSubmitting }) => (
                     <Form>
@@ -42,8 +46,7 @@ export class PostForm extends React.Component{
                         </div>
                         <div className="form-group">
                             <label htmlFor="body" className="mt-1 mb-2">Body :</label>
-                            <Field name="body" as="textarea"  className={'form-post-body form-control' + (errors.body && touched.body ? ' is-invalid' : '')} />
-                            <ErrorMessage name="body" component="div" className="invalid-feedback" />
+                            <EditorContainer stateSaver={this.changePostBody} body={this.state.content} />
                         </div>
                         <div className="d-flex w-100 flex-row-reverse form-group mt-2 mb-2">
                             <button type="submit" className="btn btn-primary " disabled={isSubmitting}>{isSubmitting? <div className="spinner-border text-light"></div>:this.state.actionName}</button>

@@ -1,24 +1,13 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# pre-requises
+ ruby version 3.1.2
+ yarn installed
+ postgresql installed
+# configure database
+*create a user who can create database, login and read/write access
+*change the ./config/database.yml with the credentials of the users
+# step to install on a pc
+bundle install
+yarn install
+rake db:create
+rake db:install
+rails -s

@@ -31,7 +31,7 @@ export default class Home extends React.Component{
                 <thead>
                     <tr>
                         <th>Topics</th>
-                        <th>Replies</th>
+                        <th className="text-center">Replies</th>
                         <th>Published</th>
                     </tr>
                 </thead>

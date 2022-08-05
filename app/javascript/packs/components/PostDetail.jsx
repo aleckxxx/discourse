@@ -7,7 +7,7 @@ import ReplyForm from "./ReplyForm";
 import ReplyItem from "./ReplyItem";
 import PostDelete from "./PostDelete";
 import UpdatePost from "./UpdatePost";
-
+import renderHTML from 'react-render-html';
 class PostDetail extends React.Component{
     constructor(props){
         super(props);
@@ -31,21 +31,24 @@ class PostDetail extends React.Component{
         this.setState({...this.state,replies: replies});
     }
     isOwner(){
-        if(authenticationService.currentUserValue && (authenticationService.currentUserValue.id == this.state.post.creator_id))
-            return true
-        return false
+        if(authenticationService.currentUserValue){
+            if(authenticationService.currentUserValue.id == this.state.post.creator_id){
+                return true;
+            }
+        }
+        return false;
     }
     render(){
         return  (
             <div className="container">
                 {this.state.post && (
                 <div>
-                    {this.isOwner? "": (
+                    {this.isOwner()?  (
                         <div className="d-flex flex-row-reverse mt-3">
                             <PostDelete post={this.state.post} />
                             <UpdatePost post={this.state.post} />
                         </div>
-                    )}
+                    ) : ""}
                     <div className="post-summary border-bottom mt-5">
                         <h3 className="mb-3">{this.state.post.title}</h3>
                     </div>
@@ -62,7 +65,7 @@ class PostDetail extends React.Component{
                             </div>     
                         </div>
                         <div className="article-body mt-3 mb-5">
-                            {this.state.post.body}
+                            {renderHTML(this.state.post.body)}
                         </div>
                     </div>
                     {this.state.post.replies.map((reply)=> <ReplyItem reply={reply} />)}
