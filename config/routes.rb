@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       delete '/posts/:id', to: 'post#delete'
       get '/post_drafts', to: 'post#drafts'
       post '/replies', to: 'reply#create'
+      post 'auth/google', to: 'social_auth#google_auth'
     end
   end
   root 'homepage#index'

@@ -55,6 +55,9 @@ gem 'omniauth'
 
 gem 'omniauth-google-oauth2'
 
+gem "omniauth-rails_csrf_protection"
+
+gem 'google-auth-token_validator'
 gem 'rack-cors'
 # Use Sass to process CSS
 # gem "sassc-rails"

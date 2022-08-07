@@ -3,19 +3,8 @@ class Api::V1::PostController < Api::V1::ApplicationController
      
     #GET /api/v1/posts
     def index
-
-     @posts = Post.where(published: true)
-                  .left_outer_joins(:replies)
-                  .select('posts.id,posts.title, posts.published_at, count(replies.id) as count')
-                  .group('posts.id,posts.title, posts.published_at')
-                  .order('posts.published_at desc').map do |p|
-                  {
-                    id: p.id,
-                    title: p.title,
-                    count: p.count,
-                    published_at: p.published_at
-                  }
-                end
+      @posts = Post.where(published: true).order("published_at desc")
+      @posts = @posts.to_json({include: {creator:{:except => :password_digest}},methods: :replies_count})
      render json: @posts, status: :ok
     end
     

@@ -2,6 +2,115 @@
 $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 @import "~@fortawesome/fontawesome-free/scss/solid";
+.post-big-title{
+    color: #1F2667;
+    font-size: 45px; 
+    font-weight: 700;
+}
+.section-image{
+    display: inline-block;
+    width: 35px;
+    object-fit: cover;
+}
+.page-content{
+    margin-bottom: 100px;
+}
+.post-title{
+    margin-left: 60px;
+    font-size: 2em;
+    color: #1F2667; 
+    font-weight: 600;
+}
+.section-text{
+    font-weight: 900;
+    font-size: 40px;
+}
+
+.home-header-content{
+    height: 200px;
+    background-color: #0099ff;
+    color: white;
+    .welcome-message{
+        font-size: 4rem;
+    }
+}
+.navbar-brand{
+    a{
+        font-size: 24px;
+        color: #1F2667; 
+        font-weight: 900;
+    }
+}
+.nav{
+    justify-content: center;
+    align-items: center;
+    a,p{
+        margin: 0;
+        color: #1F2667;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+    }
+}
+body{
+    font-family: "Work Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+    text-rendering: optimizelegibility;
+    -webkit-font-smoothing: antialiased;
+}
+.btn-primary{
+    background-color: #0099ff;
+    border-color:#0099ff;
+}
+.text-primary{
+    color:#0099ff;
+}
+.bg-primary{
+    background-color: #0099ff;
+}
+.add{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 75px;
+    height: 75px;
+    i{
+        color: white;
+        font-size: 40px;
+        font-weight: bold;
+    } 
+}
+.form-auth{
+    h1{
+        text-align: center;
+        margin-top: 10px;
+    }
+    .lock{
+        width: 100px;
+        height: 100px;
+        i{
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+        }
+    }
+}
+.omni-auth{
+    
+    button{
+        width: 100%;
+        justify-content: center;
+        font-size: 18px!important;
+    }
+}
+.auth-layout{
+    min-height: 100vh;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%);
+}
+.form-auth{
+    background-color: white;
+}
 .rdw-editor-toolbar{
     margin-bottom: 0!important;
 }
@@ -18,11 +127,7 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
         height: 200px;
     }
 }
-.post-item{
-    &:hover{
-        color: black;
-    }
-}
+
 .icon {
     width: 50px;
     height: 50px;

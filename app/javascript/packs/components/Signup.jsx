@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import * as Yup from 'yup';
 import React from "react";
 import history from "../helpers/history";
+import GoogleAuth from "./GoogleAuth";
 
 export default class Signup extends React.Component{
     constructor(props){
@@ -16,6 +17,11 @@ export default class Signup extends React.Component{
     render(){
         return (
             <div className="form-auth align-self-center shadow rounded">
+                <div className="auth-header d-flex justify-content-center">
+                    <div className="text-center bg-primary lock border rounded-circle d-flex justify-content-center align-items-center">
+                        <i className="text-white fa-solid fa-unlock"></i>
+                    </div>
+                </div>
                 <h1 className="h3 mb-3 fw-normal">Register yourself</h1>
                 <Formik
                        initialValues={{
@@ -78,6 +84,8 @@ export default class Signup extends React.Component{
                        )}
                    />
                 <p className="text-center">Already an account <Link to="/auth" className="text-primary">click here</Link></p>
+                <hr/>
+                <GoogleAuth />
             </div>)
     }
 }

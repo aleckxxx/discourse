@@ -7,6 +7,7 @@ export const authenticationService = {
     login,
     logout,
     register,
+    googleAuth,
     currentUser: currentUserSubject.asObservable(),
     get currentUserValue () { return currentUserSubject.value }
 };
@@ -17,6 +18,19 @@ function createSession(user){
     return user;
 }
 
+function googleAuth(body){
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+    };
+
+    return fetch(`/api/v1/auth/google`, requestOptions)
+        .then((resp)=>handleResponse(resp,false))
+        .then(user => {
+            return createSession(user);
+        })
+}
 function login(email, password) {
     const requestOptions = {
         method: 'POST',

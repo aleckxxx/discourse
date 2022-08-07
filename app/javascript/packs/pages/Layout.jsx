@@ -7,7 +7,9 @@ export default class Layout extends React.Component{
         return (
             <div>
                 <Header />
-                <Outlet />
+                <div className="page-content w-100">
+                    <Outlet />
+                </div>
             </div>
         )
         

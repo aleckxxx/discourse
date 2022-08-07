@@ -11,4 +11,8 @@ class Post < ApplicationRecord
         end
         true
     end
+
+    def replies_count
+        replies.count
+    end
 end

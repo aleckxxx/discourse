@@ -33,7 +33,9 @@ class NewPost extends React.Component{
         return (
             <span>
               <div className="d-flex mt-3 justify-content-end">
-                   <button className="btn btn-secondary" onClick={this.handleOpen.bind(this)}>new post</button>
+                   <button className="btn text-center btn-primary add-button add border rounded-circle d-flex justify-content-center align-items-center" onClick={this.handleOpen.bind(this)}>
+                            <i class="fa-solid fa-plus"></i>
+                   </button>
               </div>
               <Modal isOpen={this.state.show}
                 ariaHideApp={false}

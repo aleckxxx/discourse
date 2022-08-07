@@ -4,6 +4,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import {Link} from 'react-router-dom';
 import history from "../helpers/history";
+import GoogleAuth from "./GoogleAuth";
 
 export default class Signin extends React.Component{
 
@@ -17,6 +18,11 @@ export default class Signin extends React.Component{
     render(){
         return (
         <div className="form-auth align-self-center shadow rounded">
+            <div className="auth-header d-flex justify-content-center">
+                    <div className="text-center bg-primary lock border rounded-circle d-flex justify-content-center align-items-center">
+                        <i className="text-white fa-solid fa-unlock"></i>
+                    </div>
+                </div>
             <h1 className="h3 mb-3 fw-normal">Sign in</h1>
             <Formik
                    initialValues={{
@@ -63,6 +69,8 @@ export default class Signin extends React.Component{
                    )}
                />
             <p className="text-center">No account ? <Link to="/auth/register" className="text-primary">click here</Link></p>
+            <hr/>
+            <GoogleAuth />
         </div>)
     }
 }
