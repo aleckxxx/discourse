@@ -34,7 +34,7 @@ class NewPost extends React.Component{
             <span>
               <div className="d-flex mt-3 justify-content-end">
                    <button className="btn text-center btn-primary add-button add border rounded-circle d-flex justify-content-center align-items-center" onClick={this.handleOpen.bind(this)}>
-                            <i class="fa-solid fa-plus"></i>
+                            <i className="fa-solid fa-plus"></i>
                    </button>
               </div>
               <Modal isOpen={this.state.show}
