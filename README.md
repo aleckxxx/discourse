@@ -7,7 +7,7 @@
 *change the ./config/database.yml with the credentials of the users
 # step to install on a pc
 bundle install
-yarn install
+yarn installe
 rake db:create
 rake db:install
 rails -s
